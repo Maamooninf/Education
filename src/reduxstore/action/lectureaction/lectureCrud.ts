@@ -1,0 +1,33 @@
+import axios from "axios";
+import { Dispatch } from "react";
+import { RootState } from "../../store";
+import "react-toastify/dist/ReactToastify.css";
+// import { toast } from "react-toastify";
+import { ActionLecture } from "./lectureAInter";
+import { Lecture } from "../../reducer/lecturereducer/lectureRinter";
+export const Createlec = (lecture: Lecture) => {
+  return async (
+    dispatch: Dispatch<ActionLecture>,
+    getState: () => RootState
+  ) => {
+    try {
+      const {
+        userSign: { userInfo },
+      } = getState();
+      dispatch({ type: "REQUEST_CREATE_LECTURE" });
+      const { data } = await axios.post<Lecture>(
+        "http://localhost:4010/lecture/create",
+        lecture,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: userInfo.accesstoken ? userInfo.accesstoken : "",
+          },
+        }
+      );
+      dispatch({ type: "SUCCESS_CREATE_LECTURE", payload: data });
+    } catch (err: any) {
+      dispatch({ type: "FAILED_CREATE_LECTURE", payload: err.message });
+    }
+  };
+};
