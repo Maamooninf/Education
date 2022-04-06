@@ -20,10 +20,11 @@ export const userSign = (
         errorin: {},
       };
     case "SUCCESS_SIGNOUT":
-      return { ...state, userInfo: {} };
+      return { ...state, loadin: false, userInfo: {} };
 
     case "FAILED_SIGN":
       return { ...state, loadin: false, errorin: action.payload };
+
     default: {
       return state;
     }

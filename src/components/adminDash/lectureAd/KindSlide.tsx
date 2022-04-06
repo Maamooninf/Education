@@ -1,55 +1,45 @@
-import React, { useState } from "react";
 import { Lecture } from "../../../reduxstore/reducer/lecturereducer/lectureRinter";
-import { ProButton } from "../../proglang/ProStyle";
+import PushCloud from "../cloud/PushCloud";
+import { TypeSlide } from "./KindEnum";
 import { ChapterTextArea } from "./LectureStyle";
 
-const KindSlide: React.FC<{ kind: number }> = ({ kind }) => {
-  const [lec, setlec] = useState<Lecture>({
-    slides: [
-      {
-        content: "",
-        kind: 0,
-      },
-    ],
-  });
-
-  const createSlide = () => {
-    setlec((prev) => ({
-      ...prev,
-      slides: [
-        ...prev.slides,
-        {
-          content: "",
-          kind: kind,
-        },
-      ],
-    }));
-  };
+const KindSlide: React.FC<{
+  kind: string;
+  value: string;
+  setlec: React.Dispatch<React.SetStateAction<Lecture>>;
+  index: number;
+}> = ({ kind, setlec, value, index }) => {
   const updateSlide = (e: any, index: number) => {
     const { target } = e;
     setlec((prev) => {
       const slides = [...prev.slides];
-      slides[index] = { ...slides[index], ["content"]: target.value };
+      slides[index] = { ...slides[index], [target.name]: target.value };
       return { ...prev, slides };
     });
   };
-  console.log(lec);
-  if (kind === 0) {
+  if (kind === TypeSlide.Code) {
     return (
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        {lec?.slides.map((el, index) => {
-          return (
-            <ChapterTextArea
-              key={index}
-              name="content"
-              onChange={(e) => updateSlide(e, index)}
-            ></ChapterTextArea>
-          );
-        })}
-        <ProButton onClick={() => createSlide()}>Submit</ProButton>
-      </div>
+      <ChapterTextArea
+        name="content"
+        onChange={(e) => updateSlide(e, index)}
+        value={value}
+      />
     );
+  }
+
+  //
+  else if (kind === TypeSlide.Text)
+    return (
+      <ChapterTextArea
+        name="content"
+        onChange={(e) => updateSlide(e, index)}
+        value={value}
+        backgroundColor="#ffffffd6"
+        Color="black"
+      />
+    );
+  else if (kind === TypeSlide.Image) {
+    return <PushCloud setlec={setlec} index={index} />;
   } else return <></>;
 };
-
 export default KindSlide;

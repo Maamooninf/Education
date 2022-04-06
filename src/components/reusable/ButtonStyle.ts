@@ -1,12 +1,9 @@
 import styled from "styled-components";
 
 export const ButtonCl = styled.button`
-  position: absolute;
-  bottom: 20%;
-  left: 16%;
-  width: 66%;
   font-size: 16px;
   font-weight: 600;
+  width: 200px;
   color: #fff;
   cursor: pointer;
   //  margin:"20px",
@@ -18,7 +15,7 @@ export const ButtonCl = styled.button`
   font-family: "Amita", cursive;
   font-size: clamp(1rem, 1.5vw, 3rem);
   transition: all 0.5s ease-in-out;
-  margin: 5px;
+  margin: 25px;
   background-image: linear-gradient(
     to right,
     #6905bb,

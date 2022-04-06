@@ -1,57 +1,73 @@
-import React from "react";
+import { LinearProgress } from "@mui/material";
+import axios from "axios";
+import React, { FC, useState } from "react";
+import { toast } from "react-toastify";
+import { Lecture } from "../../../reduxstore/reducer/lecturereducer/lectureRinter";
+import { CloudInput } from "../lectureAd/LectureStyle";
 
-function PushCloud() {
-  // const handlesetuploaded=(e:any)=>{
+const PushCloud: FC<{
+  setlec: React.Dispatch<React.SetStateAction<Lecture>>;
+  index: number;
+}> = ({ setlec, index }) => {
+  const [progress, setprog] = useState<number>(0);
+  const handlesetuploaded = (e: any) => {
+    if (e.target.files && e.target.files[0]) {
+      let type = e.target.files[0].type.substr(0, 5);
 
-  //     if (e.target.files && e.target.files[0]){
+      if (type === "video" || type === "image") {
+        const content = e.target.files[0];
+        const formData = new FormData();
 
-  //     let type=e.target.files[0].type.substr(0,5)
+        formData.append("file", content);
 
-  //     if (type ==="video"||type==="image"){
+        formData.append("upload_preset", "jjguu4fo");
 
-  //     const content=e.target.files[0]
+        axios
+          .request({
+            method: "post",
 
-  //     const formData=new FormData()
+            url: `http://api.cloudinary.com/v1_1/donnhmpwd/${type}/upload`,
 
-  //     formData.append("file",content)
+            data: formData,
 
-  //     formData.append("upload_preset","yn84ei0z")
+            onUploadProgress: (p) => {
+              setprog((p.loaded / p.total) * 100);
+            },
+          })
 
-  //     axios.request({method:'post',
+          .then((res: any) => {
+            setlec((prev) => {
+              const slides = [...prev?.slides];
+              slides[index] = {
+                ...slides[index],
+                [content]: res.data.secure_url,
+              };
+              return { ...prev, slides };
+            });
+            toast.success(`${type} Added Successfully`);
+            setprog(0);
+          })
 
-  //     url:`http://api.cloudinary.com/v1_1/dezb1a07c/${type}/upload`,
-
-  //     data:formData,
-
-  //     onUploadProgress: (p) => {
-
-  //       setprog((p.loaded / p.total)*100)
-
-  //     }
-
-  //     })
-
-  //     .then((res:any)=>{
-
-  //      setmovie((prevState:any) => ({
-  //       ...prevState,
-  //       [e.target.name]:res.data.secure_url
-  //      }))
-
-  //      setprog(0)
-
-  //     })
-
-  //    .catch((err)=>{
-
-  //     console.log(err)
-
-  //     })
-  //       }
-
-  //     }
-  //   }
-  return <div>PushCloud</div>;
-}
+          .catch((err) => {
+            toast.error(`NetWork Error`);
+          });
+      }
+    }
+  };
+  return (
+    <>
+      {progress ? (
+        <LinearProgress
+          variant="determinate"
+          value={progress}
+          style={{ margin: "15px", width: "200px" }}
+        />
+      ) : (
+        ""
+      )}
+      <CloudInput type="file" onChange={(e) => handlesetuploaded(e)} />
+    </>
+  );
+};
 
 export default PushCloud;

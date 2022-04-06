@@ -13,14 +13,13 @@ import {
   ScreenBack,
   ScreenShape,
   SignForm,
-  SignField,
   GlobalStyle,
-  SignLabel,
 } from "./SignStyle";
+import TextField from "@mui/material/TextField";
 function SignUp() {
   const dispatch = useDispatch();
   const userRigister = useSelector((state: RootState) => state.userRigister);
-  const { errorup } = userRigister;
+  // const { errorup } = userRigister;
   const [user, setUser] = useState<User>({
     name: "",
     confirmpassword: "",
@@ -41,42 +40,45 @@ function SignUp() {
       <Screen>
         <ScreenCont>
           <SignForm>
-            <SignField
+            <TextField
+              label="name"
               name="name"
+              variant="standard"
+              style={{ margin: "10px", width: "50%" }}
               onChange={(e) => {
                 handlertext(e);
               }}
-              error={errorup ? (errorup.name ? true : false) : false}
             />
-            <SignLabel>Name</SignLabel>
 
-            <SignField
+            <TextField
+              label="email"
               name="email"
+              variant="standard"
+              style={{ margin: "10px", width: "50%" }}
               onChange={(e) => {
                 handlertext(e);
               }}
-              error={errorup ? (errorup.email ? true : false) : false}
             />
-            <SignLabel>Email</SignLabel>
 
-            <SignField
+            <TextField
+              label="password"
               name="password"
-              type="password"
+              variant="standard"
+              style={{ margin: "10px", width: "50%" }}
               onChange={(e) => {
                 handlertext(e);
               }}
-              error={errorup ? (errorup.password ? true : false) : false}
             />
-            <SignLabel>Password</SignLabel>
-            <SignField
+
+            <TextField
+              label="confirm password"
               name="confirmpassword"
-              type="password"
+              variant="standard"
+              style={{ margin: "10px", width: "50%" }}
               onChange={(e) => {
                 handlertext(e);
               }}
-              error={errorup ? (errorup.confirmpassword ? true : false) : false}
             />
-            <SignLabel>Confirm password</SignLabel>
           </SignForm>
           <ButtonCl onClick={() => sign()}>Sign up</ButtonCl>
         </ScreenCont>
@@ -84,7 +86,7 @@ function SignUp() {
           <ScreenShape
             backgroundColor={"white"}
             borderRadius="10px 72px 10px 10px"
-            height="520"
+            height="540"
             width="520"
             right="120"
             top="-50"

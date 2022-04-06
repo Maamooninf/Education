@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import header from "../../images/banner-bg.png";
 interface Paragraph {
@@ -207,6 +208,10 @@ const SlidLangBody = styled.div`
   justify-content: center;
   text-align: center;
 `;
+const SlideLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+`;
 export {
   ImgeHeader,
   Homediv,
@@ -220,4 +225,5 @@ export {
   SlideHead,
   SlidLang,
   SlidLangBody,
+  SlideLink,
 };

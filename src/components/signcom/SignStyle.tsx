@@ -7,6 +7,8 @@ const GlobalStyle = createGlobalStyle`
     font-family: Raleway, sans-serif;
     box-sizing: border-box;
     /* background-color: rgba(97, 18, 143, 0.651); */
+    background-color: #f2edf3;
+    margin-top: 70px;
   }
 `;
 const SignCont = styled.div`
@@ -50,10 +52,11 @@ const ScreenCont = styled.div`
 `;
 const SignForm = styled.div`
   display: flex;
+  box-sizing: border-box;
   justify-content: center;
+  align-items: flex-start;
   flex-direction: column;
-  padding-top: 100px;
-  padding-left: 20px;
+  padding-top: 50px;
 `;
 const SignRoute = styled.div`
   display: flex;
@@ -71,7 +74,7 @@ const SignRoute = styled.div`
 `;
 const SignLabel = styled.label`
   color: #999;
-  transform: translate(0.25rem, -3.5rem);
+  transform: translate(0.25rem, -3.7rem);
   transition: all 0.2s ease-out;
 `;
 const SignField = styled.input<Signpara>`

@@ -1,20 +1,26 @@
-import { Lecture } from "../../reducer/lecturereducer/lectureRinter";
+import { Lecture, Slide } from "../../reducer/lecturereducer/lectureRinter";
 
-export interface QuestionActionPending {
-  type: "REQUEST_CREATE_LECTURE";
+interface LectureActionPending {
+  type:
+    | "REQUEST_CREATE_LECTURE"
+    | "REQUEST_GET_LECTURES"
+    | "REQUEST_GET_SLIDES";
 }
 
-export interface QuestionActionSuccess {
-  type: "SUCCESS_CREATE_LECTURE";
-  payload: Lecture;
+interface LectureActionSuccess {
+  type:
+    | "SUCCESS_CREATE_LECTURE"
+    | "SUCCESS_GET_LECTURES"
+    | "SUCCESS_GET_SLIDES";
+  payload: Lecture[];
 }
 
-export interface QuestionActionFail {
-  type: "FAILED_CREATE_LECTURE";
+interface LectureActionFail {
+  type: "FAILED_CREATE_LECTURE" | "FAILED_GET_LECTURES" | "FAILED_GET_SLIDES";
   payload: any;
 }
 
 export type ActionLecture =
-  | QuestionActionPending
-  | QuestionActionSuccess
-  | QuestionActionFail;
+  | LectureActionPending
+  | LectureActionSuccess
+  | LectureActionFail;

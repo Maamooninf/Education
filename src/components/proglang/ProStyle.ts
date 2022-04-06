@@ -1,48 +1,65 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+interface ItemClick {
+  active: boolean;
+}
 const Prodiv = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
-  height: 100%;
+  justify-content: space-between;
+  background-color: #f2edf3;
+  min-height: 91vh;
+
   width: 100%;
   box-sizing: border-box;
+  margin-top: 53px;
 `;
-const SideDiv = styled.div`
-  display: flex;
+const SideDiv = styled.div<ItemClick>`
+  display: ${(props) => (props.active ? "flex" : "none")};
   flex-direction: column;
-  position: relative;
-`;
-const ChapterNo = styled.div`
-  box-shadow: 0px 0px 0px 2px #eee;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
+  transition: 0.2s all ease-in-out;
+  width: 220px;
+  overflow-y: auto;
 
-  width: 250px;
-  height: 50px;
-  margin-top: 5px;
-  margin-left: 5px;
-  border-radius: 10px;
+  background-color: white;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 62px;
+  padding: 5px 10px;
+
+  z-index: 999;
+`;
+const ProHead = styled.h2`
+  padding: 10px;
+  font-family: "Railway";
+`;
+const ChapterNo = styled.div<ItemClick>`
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+  line-height: 30px;
+  cursor: pointer;
+  color: ${(props) => (props.active ? "#0074d9" : "black")};
+  border-left: ${(props) => (props.active ? "4px solid #0074d9" : "")};
+  padding: 0px 10px;
+`;
+const ProLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `;
 const MainDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px;
-  width: 60%;
-`;
-
-const ChapterContent = styled.div`
-  display: flex;
-  margin-top: 10px;
-  word-spacing: 10px;
-  white-space: pre-wrap;
-  height: auto;
-  color: white;
-  background-color: rgb(40, 44, 52);
-  padding: 20px;
+  /* padding: 20px; */
+  margin-left: 15%;
+  width: 70%;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    margin-left: 0%;
+  }
 `;
 
 const ProButton = styled.button`
@@ -50,6 +67,7 @@ const ProButton = styled.button`
   cursor: pointer;
   width: 150px;
   height: 50px;
+  margin: 20px;
   border: none;
   color: white;
   font-size: 1em;
@@ -58,7 +76,7 @@ const ProButton = styled.button`
 `;
 const QuestionShow = styled.div`
   display: flex;
-  /* align-items: center; */
+
   margin-top: 20px;
   height: fit-content;
   padding: 10px;
@@ -80,14 +98,19 @@ const OptionShow = styled.div`
 
 const QuestionBody = styled.textarea`
   display: flex;
-  /* justify-content: center;
-  align-items: center;
-  text-align: center; */
+
   margin-top: 20px;
   padding: 10px;
   font-size: 1.2em;
-  color: rgb(40, 44, 52);
+  color: white;
   min-height: 90px;
+  width: 70%;
+  background: linear-gradient(
+    190deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(0, 151, 255, 1) 0%,
+    rgba(9, 9, 121, 1) 100%
+  );
   resize: none;
   &:focus {
     outline: none;
@@ -97,9 +120,10 @@ const OptionBody = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   margin-top: 20px;
+  width: 80%;
 `;
 
 const OptionContent = styled.textarea`
@@ -110,6 +134,13 @@ const OptionContent = styled.textarea`
   font-size: 1.2em;
   resize: none;
   border: none;
+  background: linear-gradient(
+    190deg,
+    rgba(2, 0, 36, 0.7) 0%,
+    rgba(0, 151, 255, 1) 0%,
+    rgba(9, 9, 121, 1) 100%
+  );
+  color: white;
   &:focus {
     outline: none;
   }
@@ -122,7 +153,7 @@ export {
   SideDiv,
   MainDiv,
   ChapterNo,
-  ChapterContent,
+  ProLink,
   ProButton,
   QuestionBody,
   OptionBody,
@@ -130,4 +161,5 @@ export {
   OptionInput,
   QuestionShow,
   OptionShow,
+  ProHead,
 };

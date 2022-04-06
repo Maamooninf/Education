@@ -7,9 +7,16 @@ import {
   NavInfo,
   NavLinks,
   Navele,
+  NavImg,
 } from "./NavBarStyle";
+import head from "../../images/right-image.png";
+import { useState } from "react";
+import DropDown from "./DropDown";
+import Exit from "@material-ui/icons/ExitToAppOutlined";
+import Arrow from "@material-ui/icons/ArrowDownward";
 // import { ReactComponent as LogoSvg } from "../home/logo1.svg";
 function NavBar() {
+  const [drop, setdrop] = useState<boolean>(false);
   const useSign = useSelector((state: RootState) => state.userSign);
   const { userInfo } = useSign;
   const dispatch = useDispatch();
@@ -24,8 +31,14 @@ function NavBar() {
       <NavInfo>
         {userInfo && Object.keys(userInfo).length > 0 ? (
           <>
-            <NavLinks to="/lang/12">Lectuers</NavLinks>
-            <Navele onClick={() => sigout()}>Logout</Navele>
+            <Navele onClick={() => setdrop(!drop)}>
+              <NavImg src={head} />
+              <Arrow style={{ fontSize: "0.9em" }} />
+              <DropDown drop={drop} />
+            </Navele>
+            <Navele onClick={() => sigout()}>
+              <Exit />
+            </Navele>
           </>
         ) : (
           <>

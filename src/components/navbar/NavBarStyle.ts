@@ -1,31 +1,31 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
+interface CustomLink {
+  fontSize?: string;
+}
+
+const breatheAnimation = keyframes`
+ 0% { opacity: 0 }
+ 100% {  opacity: 1; }
+`;
 const NavBarBody = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   color: white;
   min-height: 60px;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 100;
-  &:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
+  background-color: #fff;
+  border-bottom: 1px solid gray;
+  border-top: 1px solid gray;
+  /* background: linear-gradient(to bottom, #fefdd0 20%, #f2fec1 80%); */
 
-    height: 100%;
-    width: 100%;
-    background-image: linear-gradient(180deg, #6441a5 0%, #420a70 100%);
-    z-index: -1;
-    opacity: 0.9;
-  }
+  color: black;
 `;
 const NavLogoName = styled.div`
-  font-family: "Courier New", Courier, monospace;
   font-size: 1.7em;
   display: flex;
   justify-content: center;
@@ -35,18 +35,50 @@ const NavInfo = styled.div`
   display: flex;
   justify-content: space-evenly;
   justify-content: center;
+  position: relative;
+  transition: 0.7s all ease-in-out;
 `;
-const NavLinks = styled(Link)`
+const NavLinks = styled(Link)<CustomLink>`
   display: flex;
   align-items: center;
-  color: white;
-  font-size: 1.2em;
+  color: black;
+  font-size: ${(props) => (props.fontSize ? props.fontSize : "1.2em")};
   text-decoration: none;
   margin-left: 20px;
 `;
 const Navele = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  align-items: center;
   font-size: 1.2em;
   margin-left: 20px;
+  padding: 5px;
   cursor: pointer;
 `;
-export { NavBarBody, NavLogoName, NavInfo, NavLinks, Navele };
+const NavImg = styled.img`
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  margin-right: 10px;
+`;
+
+const DropBody = styled.div`
+  display: flex;
+  justify-content: space-around;
+  /* text-align: center; */
+  flex-direction: column;
+  height: 100px;
+  width: 150px;
+  position: absolute;
+  top: 55px;
+  left: 45px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 3px 21px 0 rgb(0 0 0 / 20%);
+  /* transition: all 0.3s ease-out; */
+  animation-name: ${breatheAnimation};
+  animation-duration: 0.4s;
+`;
+export { NavBarBody, NavLogoName, NavInfo, NavLinks, Navele, NavImg, DropBody };

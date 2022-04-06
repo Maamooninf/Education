@@ -8,15 +8,14 @@ import {
   ScreenBack,
   ScreenShape,
   SignForm,
-  SignField,
   GlobalStyle,
-  SignLabel,
 } from "./SignStyle";
 import { ButtonCl } from "../reusable/ButtonStyle";
 import { RootState } from "../../reduxstore/store";
 import { useDispatch, useSelector } from "react-redux";
 import { Login } from "../../reduxstore/action/useraction/userAsine";
 import { ToastContainer } from "react-toastify";
+import TextField from "@mui/material/TextField";
 function Signin() {
   const dispatch = useDispatch();
   const userSign = useSelector((state: RootState) => state.userSign);
@@ -38,35 +37,26 @@ function Signin() {
       <Screen>
         <ScreenCont>
           <SignForm>
-            <SignField
+            <TextField
+              label="Email"
               name="email"
+              variant="standard"
+              style={{ margin: "10px", width: "50%" }}
               onChange={(e) => {
                 handlertext(e);
               }}
-              error={
-                errorin
-                  ? Object.keys(errorin).length !== 0
-                    ? true
-                    : false
-                  : false
-              }
             />
-            <SignLabel>Email</SignLabel>
-            <SignField
+
+            <TextField
+              label="Password"
               name="password"
+              variant="standard"
               type="password"
+              style={{ margin: "10px", width: "50%" }}
               onChange={(e) => {
                 handlertext(e);
               }}
-              error={
-                errorin
-                  ? Object.keys(errorin).length !== 0
-                    ? true
-                    : false
-                  : false
-              }
             />
-            <SignLabel>Password</SignLabel>
           </SignForm>
           <ButtonCl onClick={() => signIn()}>Sign in</ButtonCl>
         </ScreenCont>

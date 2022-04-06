@@ -7,6 +7,7 @@
   margin: 0;
   padding: 0;
   font-family: Raleway, sans-serif;
+  /* overflow-x: hidden; */
 }
 ::-webkit-scrollbar {
   width: 8px;
@@ -25,9 +26,6 @@
 }
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #b30000;
-}
 .App {
   text-align: center;
 }
@@ -35,7 +33,7 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-  color: rgb(156, 155, 149);
+  color: rgba(141, 17, 236, 0.527);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -52,7 +50,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(69, 119, 228);
 }
 
 .App-link {

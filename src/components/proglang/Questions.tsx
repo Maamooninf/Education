@@ -1,23 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { GetLangs } from "../../reduxstore/action/langaction/langCrud";
 import { Createques } from "../../reduxstore/action/questionaction/questionCrud";
 import { RootState } from "../../reduxstore/store";
-import { Option, Question } from "./ProLangInterface";
+import { OptionValue, SelectChoice } from "../adminDash/lectureAd/LectureStyle";
+import { Question } from "./ProLangInterface";
+
 import {
   OptionBody,
   OptionContent,
   OptionInput,
-  OptionShow,
   ProButton,
   QuestionBody,
-  QuestionShow,
 } from "./ProStyle";
 
 function Questions() {
   const dispatch = useDispatch();
-  const quesTion = useSelector((state: RootState) => state.quesTion);
-  const { questionsDa } = quesTion;
-
+  useEffect(() => {
+    dispatch(GetLangs());
+  }, [dispatch]);
+  const LangRed = useSelector((state: RootState) => state.lanGuage);
+  const { langDa } = LangRed;
   const [question, setquestion] = useState<Question>({
     description: "",
     options: [
@@ -38,12 +42,13 @@ function Questions() {
         isTrue: false,
       },
     ],
-    lecture: "",
+    language: "",
   });
+
   const handlchange = (e: any) => {
     setquestion((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-  //Createques
+
   const updateOption = (e: any, index: number) => {
     const { target } = e;
     const { name } = target;
@@ -58,21 +63,28 @@ function Questions() {
   const submitQuestion = () => {
     dispatch(Createques(question));
   };
+  console.log(question);
   return (
-    <>
-      {questionsDa?.map((el: Question, index: number) => {
-        return (
-          <>
-            <QuestionShow>
-              <h3>{index + 1}.</h3>
-              {el.description}
-            </QuestionShow>
-            {el.options.map((op: Option) => {
-              return <OptionShow>{op.description}</OptionShow>;
-            })}
-          </>
-        );
-      })}
+    <div
+      style={{
+        marginTop: "50px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+      }}
+    >
+      <SelectChoice name="language" onChange={(e) => handlchange(e)}>
+        <OptionValue>Choose Language</OptionValue>
+        {langDa?.map((el) => {
+          return (
+            <OptionValue key={el._id} value={el._id}>
+              {el.lang}
+            </OptionValue>
+          );
+        })}
+      </SelectChoice>
 
       <QuestionBody name="description" onChange={(e) => handlchange(e)} />
       {question.options.map((el, index) => {
@@ -91,8 +103,9 @@ function Questions() {
           </OptionBody>
         );
       })}
-      <ProButton onClick={() => submitQuestion()}>Submit</ProButton>
-    </>
+
+      <ProButton onClick={() => submitQuestion()}>Create Exersize</ProButton>
+    </div>
   );
 }
 

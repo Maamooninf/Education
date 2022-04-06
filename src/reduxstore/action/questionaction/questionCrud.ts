@@ -25,7 +25,7 @@ export const Createques = (question: Question) => {
       dispatch({ type: "SUCCESS_CREATE_QUESTION", payload: question });
     } catch (err: any) {
       if (err.response) {
-        toast.error(err.response.data.message);
+        toast.error("Failed to Create Question");
         dispatch({
           type: "FAILED_CREATE_QUESTION",
           payload: err.response.data,

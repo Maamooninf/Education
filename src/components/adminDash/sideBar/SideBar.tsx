@@ -1,30 +1,32 @@
 import {
   SideBarBody,
   SideShapeBody,
-  SlideShap,
-  SlideLogoBody,
-  SlideLogoItem,
-  SlideShowOrHide,
+  SideLogoBody,
+  SideItem,
+  SideShowOrHide,
+  SideImage,
+  SideNav,
 } from "./SideBarStyle";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import LastPageIcon from "@material-ui/icons/LastPage";
-//import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import AddOutlined from "@material-ui/icons/AddOutlined";
+import HomeOutlines from "@material-ui/icons/Home";
+import header from "../../../images/left-image.png";
+import QuizIcon from "@mui/icons-material/Quiz";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import GroupsIcon from "@mui/icons-material/Groups";
 import { useState } from "react";
 function SideBar() {
-  const [toggle, settoggle] = useState<boolean>(true);
+  const [toggle, settoggle] = useState<boolean>(false);
   const changetog = () => {
     settoggle(!toggle);
   };
   return (
     <SideBarBody toggle={toggle}>
       <SideShapeBody>
-        <SlideShap />
-        <SlideShap backgroundColor="rgb(245, 241, 7)" />
-        <SlideShap backgroundColor="rgb(52, 200, 7)" />
         {toggle ? (
           <FirstPageIcon
-            style={{ color: "gray", cursor: "pointer" }}
+            style={{ color: "gray", cursor: "pointer", marginTop: "18px" }}
             onClick={() => changetog()}
           />
         ) : (
@@ -32,26 +34,86 @@ function SideBar() {
             style={{
               color: "gray",
               cursor: "pointer",
-              position: "absolute",
-              left: "10px",
+              marginTop: "20px",
             }}
             onClick={() => changetog()}
           />
         )}
       </SideShapeBody>
-      <SlideLogoBody>
-        <SlideLogoItem>
-          <SlideShowOrHide toggle={toggle}>Keep Going</SlideShowOrHide>
-        </SlideLogoItem>
+      <SideLogoBody>
+        <SideItem>
+          <SideShowOrHide toggle={toggle}>
+            <SideImage src={header} />
+            Admin
+          </SideShowOrHide>
+        </SideItem>
+        <SideNav end to="/admindash">
+          <SideItem>
+            <HomeOutlines
+              style={{
+                fontSize: "1.5em",
+                height: "1.6em",
+                color: "gray",
+                marginLeft: "2px",
+              }}
+            />
+            <SideShowOrHide toggle={toggle}>Dashboard</SideShowOrHide>
+          </SideItem>
+        </SideNav>
 
-        <SlideLogoItem>
-          <SlideShowOrHide toggle={toggle}> Manage Lecture</SlideShowOrHide>
-        </SlideLogoItem>
-        <SlideLogoItem padding="20px 0px 0px 0px">
-          <AddOutlined style={{ fontSize: "2.2em", height: "1.8em" }} />
-          <SlideShowOrHide toggle={toggle}> Add Lecture</SlideShowOrHide>
-        </SlideLogoItem>
-      </SlideLogoBody>
+        <SideNav end to="/admindash/lecture">
+          <SideItem>
+            <MenuBookIcon
+              style={{ fontSize: "1.5em", height: "1.6em", color: "gray" }}
+            />
+            <SideShowOrHide toggle={toggle}> Add Lecture</SideShowOrHide>
+          </SideItem>
+        </SideNav>
+
+        <SideNav end to="/admindash/question">
+          <SideItem>
+            <QuizIcon
+              style={{
+                fontSize: "1.5em",
+                height: "1.6em",
+                color: "inherit",
+              }}
+            />
+            <SideShowOrHide toggle={toggle} style={{ color: "inherit" }}>
+              Add Exerice
+            </SideShowOrHide>
+          </SideItem>
+        </SideNav>
+        <SideNav end to="/admindash/account">
+          <SideItem>
+            <SupervisorAccountIcon
+              style={{
+                fontSize: "1.5em",
+                height: "1.6em",
+                color: "inherit",
+              }}
+            />
+            <SideShowOrHide toggle={toggle} style={{ color: "inherit" }}>
+              Add Teacher
+            </SideShowOrHide>
+          </SideItem>
+        </SideNav>
+
+        <SideNav end to="/admindash/conver">
+          <SideItem>
+            <GroupsIcon
+              style={{
+                fontSize: "1.5em",
+                height: "1.6em",
+                color: "inherit",
+              }}
+            />
+            <SideShowOrHide toggle={toggle} style={{ color: "inherit" }}>
+              Add Teacher
+            </SideShowOrHide>
+          </SideItem>
+        </SideNav>
+      </SideLogoBody>
     </SideBarBody>
   );
 }

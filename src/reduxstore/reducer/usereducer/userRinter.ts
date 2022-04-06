@@ -18,3 +18,21 @@ export interface State {
   errorin?: any;
   errorup?: any;
 }
+
+export interface UserDashInter {
+  _id: number;
+  total: number;
+}
+export interface Account {
+  supername: string;
+  profilePic?: string;
+  email: string;
+  expertise: Array<string>;
+}
+
+export interface UserDashState {
+  userload: boolean;
+  usererror: any;
+  totalusers: Array<any>;
+  employees: Array<Account>;
+}

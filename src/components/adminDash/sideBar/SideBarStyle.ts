@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 interface Side {
   backgroundColor?: string;
@@ -6,32 +7,36 @@ interface Side {
   margin?: string;
 }
 interface OpClose {
-  toggle: boolean;
+  toggle?: boolean;
 }
+
 const SideBarBody = styled.div<OpClose>`
   display: flex;
   flex-direction: column;
-
-  position: -webkit-sticky;
-  position: fixed;
-  top: 60px;
-  min-height: 100%;
-  transition: 0.6s all ease-in-out;
-  box-shadow: 0px 0px 2.5px #5c5696;
-  width: ${(props) => (!props.toggle ? "30px" : "200px")};
+  transition: 0.2s all ease-in-out;
+  width: ${(props) => (!props.toggle ? "30px" : "220px")};
   overflow-x: hidden;
+
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 0;
   padding: 5px;
-  /* background: #eee; */
+  background: #fff;
+  z-index: 999;
+
+  /* @media screen and (max-width: 900px) {
+  } */
 `;
 const SideShapeBody = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  /* 
-  border-top: 230px solid rgba(66, 5, 207, 0.959);
-  border-right: 230px solid transparent; */
+  justify-content: flex-end;
+  align-items: center;
+  color: #9a55ff;
+  font-size: 2.1em;
 `;
-const SlideShap = styled.div<Side>`
+const SideShap = styled.div<Side>`
   height: 15px;
   width: 15px;
   border-radius: 100%;
@@ -39,30 +44,52 @@ const SlideShap = styled.div<Side>`
     props.backgroundColor ? props.backgroundColor : "red"};
   margin: 5px;
 `;
-const SlideLogoBody = styled.ul`
+const SideLogoBody = styled.ul`
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
 `;
-const SlideLogoItem = styled.li<Side>`
+const SideItem = styled.li<Side>`
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   align-items: center;
-  color: gray;
-  padding: ${(props) => (props.padding ? props.padding : "")};
-  font-size: ${(props) => (props.fontSize ? props.fontSize : "")};
+  justify-content: space-around;
+  padding-top: 5px;
+
+  font-size: ${(props) =>
+    props.fontSize ? props.fontSize : "clamp(0.8em,0.95rem,1.4rem)"};
 `;
-const SlideShowOrHide = styled.div<OpClose>`
+
+const SideShowOrHide = styled.div<OpClose>`
   display: ${(props) => (!props.toggle ? "none" : "flex")};
+  font-size: 0.9em;
   justify-content: center;
   align-items: center;
+  font-family: "Raleway";
+
+  font-size: 1.1em;
+`;
+
+const SideNav = styled(NavLink)`
+  color: gray;
+  text-decoration: none;
+  margin-top: 18px;
+  &.active {
+    color: #0074d9;
+    border-left: 4px solid #0074d9;
+  }
+`;
+const SideImage = styled.img`
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
 `;
 export {
   SideBarBody,
   SideShapeBody,
-  SlideShap,
-  SlideLogoBody,
-  SlideLogoItem,
-  SlideShowOrHide,
+  SideShap,
+  SideLogoBody,
+  SideItem,
+  SideShowOrHide,
+  SideImage,
+  SideNav,
 };
