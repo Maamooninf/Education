@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { breatheAnimation } from "../../navbar/NavBarStyle";
 interface Side {
   backgroundColor?: string;
   fontSize?: string;
@@ -13,10 +14,10 @@ interface OpClose {
 const SideBarBody = styled.div<OpClose>`
   display: flex;
   flex-direction: column;
-  transition: 0.2s all ease-in-out;
+  /* transition: 0.2s all ease-in-out; */
   width: ${(props) => (!props.toggle ? "30px" : "220px")};
+  transition: width 0.4s ease-out;
   overflow-x: hidden;
-
   position: fixed;
   left: 0;
   bottom: 0;
@@ -52,20 +53,18 @@ const SideItem = styled.li<Side>`
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
+  text-align: center;
   justify-content: space-around;
-  padding-top: 5px;
-
+  margin-top: 10px;
+  /* 
   font-size: ${(props) =>
-    props.fontSize ? props.fontSize : "clamp(0.8em,0.95rem,1.4rem)"};
+    props.fontSize ? props.fontSize : "clamp(0.8em,0.95rem,1.4rem)"}; */
 `;
 
 const SideShowOrHide = styled.div<OpClose>`
   display: ${(props) => (!props.toggle ? "none" : "flex")};
-  font-size: 0.9em;
-  justify-content: center;
-  align-items: center;
-  font-family: "Raleway";
-
+  animation-name: ${breatheAnimation};
+  animation-duration: 1.3s;
   font-size: 1.1em;
 `;
 

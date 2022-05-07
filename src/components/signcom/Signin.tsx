@@ -58,16 +58,33 @@ function Signin() {
               }}
             />
           </SignForm>
-          <ButtonCl onClick={() => signIn()}>Sign in</ButtonCl>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              position: "absolute",
+              bottom: "10%",
+              left: "10%",
+              right: "10%",
+            }}
+          >
+            <ButtonCl onClick={() => signIn()}>Sign in</ButtonCl>
+          </div>
         </ScreenCont>
         <ScreenBack>
           <ScreenShape
             backgroundColor={"white"}
+            // borderRadius="10px 72px 10px 10px"
+            // height="500"
+            // width="500"
+            // right="120"
+            // top="-100"
             borderRadius="10px 72px 10px 10px"
-            height="520"
-            width="520"
-            right="120"
-            top="-120"
+            height="440"
+            width="420"
+            right="100"
+            top="-100"
             zIndex={2}
           />
           <ScreenShape
@@ -98,7 +115,6 @@ function Signin() {
             zIndex={0}
           />
         </ScreenBack>
-        <SignRoute>Don't have an account?</SignRoute>
       </Screen>
     </SignCont>
   );

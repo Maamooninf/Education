@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 interface CustomLink {
   fontSize?: string;
 }
-
-const breatheAnimation = keyframes`
+interface CustomDrop {
+  backgroundColor?: string;
+}
+export const breatheAnimation = keyframes`
  0% { opacity: 0 }
+ 20% { opacity: 0.4 }
  100% {  opacity: 1; }
 `;
 const NavBarBody = styled.div`
@@ -64,7 +67,7 @@ const NavImg = styled.img`
   margin-right: 10px;
 `;
 
-const DropBody = styled.div`
+const DropBody = styled.div<CustomDrop>`
   display: flex;
   justify-content: space-around;
   /* text-align: center; */
@@ -73,9 +76,10 @@ const DropBody = styled.div`
   width: 150px;
   position: absolute;
   top: 55px;
-  left: 45px;
+  right: 8px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: ${(props) =>
+    props.backgroundColor ? props.backgroundColor : "#fff"};
   box-shadow: 0 3px 21px 0 rgb(0 0 0 / 20%);
   /* transition: all 0.3s ease-out; */
   animation-name: ${breatheAnimation};

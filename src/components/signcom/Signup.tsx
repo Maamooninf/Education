@@ -44,7 +44,7 @@ function SignUp() {
               label="name"
               name="name"
               variant="standard"
-              style={{ margin: "10px", width: "50%" }}
+              style={{ margin: "10px", width: "45%" }}
               onChange={(e) => {
                 handlertext(e);
               }}
@@ -54,7 +54,7 @@ function SignUp() {
               label="email"
               name="email"
               variant="standard"
-              style={{ margin: "10px", width: "50%" }}
+              style={{ margin: "10px", width: "45%" }}
               onChange={(e) => {
                 handlertext(e);
               }}
@@ -64,7 +64,7 @@ function SignUp() {
               label="password"
               name="password"
               variant="standard"
-              style={{ margin: "10px", width: "50%" }}
+              style={{ margin: "10px", width: "45%" }}
               onChange={(e) => {
                 handlertext(e);
               }}
@@ -74,21 +74,34 @@ function SignUp() {
               label="confirm password"
               name="confirmpassword"
               variant="standard"
-              style={{ margin: "10px", width: "50%" }}
+              style={{ margin: "10px", width: "45%" }}
               onChange={(e) => {
                 handlertext(e);
               }}
             />
           </SignForm>
-          <ButtonCl onClick={() => sign()}>Sign up</ButtonCl>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              position: "absolute",
+              bottom: "8%",
+              left: "10%",
+              right: "10%",
+            }}
+          >
+            <ButtonCl onClick={() => sign()}>Sign up</ButtonCl>
+          </div>
         </ScreenCont>
+
         <ScreenBack>
           <ScreenShape
             backgroundColor={"white"}
             borderRadius="10px 72px 10px 10px"
-            height="540"
-            width="520"
-            right="120"
+            height="440"
+            width="420"
+            right="100"
             top="-50"
             zIndex={2}
           />
@@ -120,7 +133,7 @@ function SignUp() {
             zIndex={0}
           />
         </ScreenBack>
-        <SignRoute>Already have an account?</SignRoute>
+        {/* <SignRoute>Already have an account?</SignRoute>  */}
       </Screen>
     </SignCont>
   );

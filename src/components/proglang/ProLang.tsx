@@ -14,27 +14,11 @@ function ProLang() {
   const [currentLecture, setcurrentLecture] = useState<string>("");
 
   useEffect(() => {
-    const lect = localStorage.getItem("Lecture");
-    console.log(lect);
-    if (lect) {
-      setcurrentLecture(lect);
-    }
-    return () => {
-      localStorage.removeItem("Lecture");
-    };
-  }, []);
-
-  useEffect(() => {
     if (prolang) dispatch(GetLecs(prolang));
   }, [prolang, dispatch]);
 
   const LecRed = useSelector((state: RootState) => state.lecTure);
   const { lecDa } = LecRed;
-
-  const selectlecture = (leId: string) => {
-    localStorage.setItem("Lecture", leId);
-    setcurrentLecture(leId);
-  };
 
   return (
     <Prodiv>
@@ -52,7 +36,7 @@ function ProLang() {
               active={currentLecture === lec._id}
               key={lec._id}
               onClick={() => {
-                selectlecture(lec._id || "");
+                setcurrentLecture(lec._id || "");
               }}
             >
               {lec.title}

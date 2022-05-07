@@ -94,7 +94,7 @@ function SideBar() {
               }}
             />
             <SideShowOrHide toggle={toggle} style={{ color: "inherit" }}>
-              Add Teacher
+              Manage Accounts
             </SideShowOrHide>
           </SideItem>
         </SideNav>
@@ -109,7 +109,7 @@ function SideBar() {
               }}
             />
             <SideShowOrHide toggle={toggle} style={{ color: "inherit" }}>
-              Add Teacher
+              Add Group
             </SideShowOrHide>
           </SideItem>
         </SideNav>

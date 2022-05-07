@@ -1,20 +1,32 @@
-import { Question } from "../../../components/proglang/ProLangInterface";
+import { Option, Question } from "../../reducer/questionreducer/questionRinter";
 
-export interface QuestionActionPending {
-  type: "REQUEST_CREATE_QUESTION";
+interface QuestionActionPending {
+  type:
+    | "REQUEST_CREATE_QUESTION"
+    | "REQUEST_GET_QUESTIONS"
+    | "REQUEST_GET_OPTIONS";
 }
 
-export interface QuestionActionSuccess {
-  type: "SUCCESS_CREATE_QUESTION";
+interface QuestionActionSuccess {
+  type: "SUCCESS_CREATE_QUESTION" | "SUCCESS_GET_OPTIONS";
   payload: Question;
 }
 
-export interface QuestionActionFail {
-  type: "FAILED_CREATE_QUESTION";
+interface QuestionSuccessGet {
+  type: "SUCCESS_GET_QUESTIONS";
+  payload: Question[];
+}
+
+interface QuestionActionFail {
+  type:
+    | "FAILED_CREATE_QUESTION"
+    | "FAILED_GET_QUESTIONS"
+    | "FAILED_GET_OPTIONS";
   payload: any;
 }
 
 export type ActionQues =
   | QuestionActionPending
   | QuestionActionSuccess
+  | QuestionSuccessGet
   | QuestionActionFail;

@@ -25,6 +25,7 @@ export const lanGuage = (
 
     case "REQUEST_GET_LANGUAGE":
       return { ...state, langload: true };
+
     case "SUCCESS_GET_LANGUAGE":
       return {
         ...state,
@@ -32,6 +33,7 @@ export const lanGuage = (
         langDa: action.payload,
         langerr: {},
       };
+
     case "FAILED_GET_LANGUAGE":
       return { ...state, langload: false, langerr: action.payload };
 

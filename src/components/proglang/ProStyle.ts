@@ -16,12 +16,13 @@ const Prodiv = styled.div`
   margin-top: 53px;
 `;
 const SideDiv = styled.div<ItemClick>`
-  display: ${(props) => (props.active ? "flex" : "none")};
+  /* display: ${(props) => (props.active ? "flex" : "none")}; */
+  display: flex;
   flex-direction: column;
   transition: 0.2s all ease-in-out;
-  width: 220px;
   overflow-y: auto;
-
+  overflow-x: hidden;
+  width: ${(props) => (props.active ? "220px" : "50px")};
   background-color: white;
   position: fixed;
   left: 0;
@@ -38,6 +39,7 @@ const ProHead = styled.h2`
 const ChapterNo = styled.div<ItemClick>`
   display: flex;
   align-items: center;
+  justify-content: space-around;
   margin-top: 25px;
   line-height: 30px;
   cursor: pointer;

@@ -45,7 +45,7 @@ export const GetLecs = (langId: string) => {
         userSign: { userInfo },
       } = getState();
       dispatch({ type: "REQUEST_GET_LECTURES" });
-      const { data } = await axios.get<Lecture[]>(
+      const { data } = await axios.get(
         `http://localhost:4010/lecture/lan/${langId}`,
         {
           headers: {

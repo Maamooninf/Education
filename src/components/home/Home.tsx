@@ -89,8 +89,14 @@ function Home() {
                 <HeaderButton>
                   <SlideLink to={`/lang/${lan._id}`}>Start Learn</SlideLink>
                 </HeaderButton>
+
                 <HeaderButton>
-                  <SlideLink to={`/lang/${lan._id}`}>Start Disscuss</SlideLink>
+                  <SlideLink to={`/question/${lan.lang}`}>Start Quiz</SlideLink>
+                </HeaderButton>
+                <HeaderButton>
+                  <SlideLink to={`/chating/${lan._id}`}>
+                    Start Disscuss
+                  </SlideLink>
                 </HeaderButton>
               </SlidLangBody>
             </SlidLang>

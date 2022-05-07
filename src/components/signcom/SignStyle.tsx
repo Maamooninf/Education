@@ -31,8 +31,9 @@ const Signp = styled.p<Signpara>`
 const Screen = styled.div`
   background: linear-gradient(90deg, #5d54a4, #7c78b8);
   position: relative;
-  height: 570px;
+  height: 500px;
   width: 320px;
+
   box-shadow: 0px 0px 10px #5c5696;
   @media only screen and (max-width: 600px) {
     width: 290px;
@@ -49,6 +50,8 @@ const ScreenCont = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  /* justify-content: center; */
 `;
 const SignForm = styled.div`
   display: flex;
@@ -56,7 +59,8 @@ const SignForm = styled.div`
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  padding-top: 50px;
+  padding-top: 40px;
+  padding-left: 20px;
 `;
 const SignRoute = styled.div`
   display: flex;

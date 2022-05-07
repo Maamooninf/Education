@@ -2,8 +2,9 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Account, User } from "../../reducer/usereducer/userRinter";
+import { User, UserOrig } from "../../reducer/usereducer/userRinter";
 import { ActionUser } from "./actionInterface";
+import { RootState } from "../../store";
 
 export const Register = (user: User) => {
   return async (dispatch: Dispatch<ActionUser>) => {
@@ -25,13 +26,22 @@ export const Register = (user: User) => {
     }
   };
 };
-export const CreateAccount = (user: Account) => {
-  return async (dispatch: Dispatch<ActionUser>) => {
+export const CreateAccount = (user: UserOrig) => {
+  return async (dispatch: Dispatch<ActionUser>, getState: () => RootState) => {
     try {
+      const {
+        userSign: { userInfo },
+      } = getState();
       dispatch({ type: "REQUEST_RIGISTER" });
       const { data } = await axios.post(
-        "http://localhost:4010/account/create",
-        user
+        "http://localhost:4010/auth/createAccount",
+        user,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: userInfo.accesstoken ? userInfo.accesstoken : "",
+          },
+        }
       );
       toast.success(data);
       dispatch({ type: "SUCCESS_RIGISTER", payload: data });

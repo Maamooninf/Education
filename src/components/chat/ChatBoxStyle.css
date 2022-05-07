@@ -1,0 +1,86 @@
+.chatbox {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 60%;
+  height: 100%;
+  overflow-x: hidden;
+}
+.chatmessages {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  width: 96%;
+  height: 100%;
+  padding: 0px 10px;
+  /* border: 1px solid darkgoldenrod; */
+  color: white;
+  padding: 5px 5px;
+}
+.messagebod {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  max-width: 200px;
+  background-color: rgb(22, 32, 37);
+
+  border: 0;
+  border-radius: 7px;
+  margin-top: 10px;
+  padding: 10px;
+  margin-right: 5px;
+  white-space: pre-wrap;
+}
+.own {
+  display: flex;
+  /* flex-direction: row-reverse; */
+  flex-direction: column;
+  margin-left: auto;
+  max-width: 200px;
+  text-align: left;
+  background-color: rgb(61, 138, 182);
+  border: 0;
+  border-radius: 7px;
+  margin-top: 10px;
+  padding: 10px;
+  margin-right: 5px;
+  white-space: pre-wrap;
+}
+.chatsender {
+  display: flex;
+  width: 100%;
+
+  align-items: center;
+}
+.Messageinput {
+  border-radius: 10px;
+  resize: none;
+  width: 100%;
+  padding: 10px;
+}
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  background: rgb(80, 100, 213);
+  width: 20%;
+  left: 0;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* color:rgb(49, 135, 166) */
+}
+
+/* @media only screen and (max-width: 750px) {
+    .aside{
+      width: 0;
+      display: none;
+    }
+    .chatbox{
+      width: 97%;
+    }
+  } */

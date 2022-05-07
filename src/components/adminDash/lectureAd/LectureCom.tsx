@@ -1,22 +1,17 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import { GetLangs } from "../../../reduxstore/action/langaction/langCrud";
 import { Createlec } from "../../../reduxstore/action/lectureaction/lectureCrud";
 import { Lecture } from "../../../reduxstore/reducer/lecturereducer/lectureRinter";
-import { RootState } from "../../../reduxstore/store";
 import { ProButton } from "../../proglang/ProStyle";
+import AutoComLang from "../../reusable/AutoComLang";
 import { TypeSlide } from "./KindEnum";
 import KindSlide from "./KindSlide";
 import { SelectChoice, OptionValue, LectureBody } from "./LectureStyle";
 
 function LectureAd() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(GetLangs());
-  }, [dispatch]);
-  const LangRed = useSelector((state: RootState) => state.lanGuage);
-  const { langDa } = LangRed;
+
   const [lec, setlec] = useState<Lecture>({
     slides: [
       {
@@ -40,9 +35,8 @@ function LectureAd() {
       ],
     }));
   };
-
-  const updateLect = (e: any) => {
-    setlec((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const addLanguage = (newvalue: any) => {
+    setlec((prev) => ({ ...prev, ["language"]: newvalue?._id || "" }));
   };
 
   const createlecture = () => {
@@ -59,16 +53,8 @@ function LectureAd() {
   return (
     <LectureBody>
       <ToastContainer />
-      <SelectChoice onChange={(e) => updateLect(e)} name="language">
-        <OptionValue>Choose Language</OptionValue>
-        {langDa?.map((el) => {
-          return (
-            <OptionValue key={el._id} value={el._id}>
-              {el.lang}
-            </OptionValue>
-          );
-        })}
-      </SelectChoice>
+
+      <AutoComLang setState={addLanguage} multiple={false} label={"Language"} />
       {lec.slides?.map((el, index) => {
         return (
           <div

@@ -20,13 +20,13 @@ const PushCloud: FC<{
 
         formData.append("file", content);
 
-        formData.append("upload_preset", "jjguu4fo");
+        formData.append("upload_preset", "");
 
         axios
           .request({
             method: "post",
 
-            url: `http://api.cloudinary.com/v1_1/donnhmpwd/${type}/upload`,
+            url: ``,
 
             data: formData,
 

@@ -1,3 +1,5 @@
+// import { Lang } from "../langreducer/langRinter";
+
 export interface User {
   name?: string;
   email?: string;
@@ -5,13 +7,21 @@ export interface User {
   confirmpassword?: string;
   accesstoken?: string;
   refreshtoken?: string;
+  roles?: Array<string>;
   isUser?: boolean;
   isAdmin?: boolean;
   isEmploye?: boolean;
 }
-
+export interface UserOrig {
+  name: string;
+  email: string;
+  password?: string;
+  confirmpassword?: string;
+  roles: Array<string>;
+  languages: Array<string>;
+}
 export interface State {
-  message?: string;
+  message?: any;
   userInfo?: User;
   loadin?: boolean;
   loadup?: boolean;
@@ -23,16 +33,21 @@ export interface UserDashInter {
   _id: number;
   total: number;
 }
-export interface Account {
-  supername: string;
-  profilePic?: string;
+export interface UserForSerach {
+  _id: string;
   email: string;
-  expertise: Array<string>;
+  name: string;
+  Isonline?: boolean;
+}
+export interface UserSearch {
+  totalCount: [{ total: number }];
+  users: UserForSerach[];
 }
 
 export interface UserDashState {
   userload: boolean;
   usererror: any;
   totalusers: Array<any>;
-  employees: Array<Account>;
+  users: UserForSerach[];
+  totalUsers: number;
 }

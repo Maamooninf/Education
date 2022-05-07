@@ -1,11 +1,7 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import { GetLangs } from "../../reduxstore/action/langaction/langCrud";
-import { Createques } from "../../reduxstore/action/questionaction/questionCrud";
-import { RootState } from "../../reduxstore/store";
-import { OptionValue, SelectChoice } from "../adminDash/lectureAd/LectureStyle";
-import { Question } from "./ProLangInterface";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Createques } from "../../../reduxstore/action/questionaction/questionCrud";
+import { Question } from "../../../reduxstore/reducer/questionreducer/questionRinter";
 
 import {
   OptionBody,
@@ -13,15 +9,12 @@ import {
   OptionInput,
   ProButton,
   QuestionBody,
-} from "./ProStyle";
+} from "../../proglang/ProStyle";
+import AutoComLang from "../../reusable/AutoComLang";
 
 function Questions() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(GetLangs());
-  }, [dispatch]);
-  const LangRed = useSelector((state: RootState) => state.lanGuage);
-  const { langDa } = LangRed;
+
   const [question, setquestion] = useState<Question>({
     description: "",
     options: [
@@ -60,10 +53,13 @@ function Questions() {
     });
   };
 
+  const addLanguage = (newvalue: any) => {
+    setquestion((prev) => ({ ...prev, ["language"]: newvalue?._id || "" }));
+  };
   const submitQuestion = () => {
     dispatch(Createques(question));
   };
-  console.log(question);
+
   return (
     <div
       style={{
@@ -75,16 +71,7 @@ function Questions() {
         width: "100%",
       }}
     >
-      <SelectChoice name="language" onChange={(e) => handlchange(e)}>
-        <OptionValue>Choose Language</OptionValue>
-        {langDa?.map((el) => {
-          return (
-            <OptionValue key={el._id} value={el._id}>
-              {el.lang}
-            </OptionValue>
-          );
-        })}
-      </SelectChoice>
+      <AutoComLang setState={addLanguage} multiple={false} label="Language" />
 
       <QuestionBody name="description" onChange={(e) => handlchange(e)} />
       {question.options.map((el, index) => {

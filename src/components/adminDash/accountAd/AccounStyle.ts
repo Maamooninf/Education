@@ -12,8 +12,10 @@ const AccountDiv = styled.div`
 `;
 const AccountInfo = styled.div`
   display: flex;
-  flex-direction: column;
-
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
   /* align-items: center; */
 
   align-self: center;

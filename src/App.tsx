@@ -10,33 +10,25 @@ import { Maindiv } from "./AppStyle";
 import Signin from "./components/signcom/Signin";
 import { OnlineRoute, RequireAuth } from "./routes/AuthRoute";
 import Home from "./components/home/Home";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "./reduxstore/store";
 import ProLang from "./components/proglang/ProLang";
 import Load from "./components/reusable/Load";
 import NavBar from "./components/navbar/NavBar";
 import AdminBo from "./components/adminDash/AdminBo";
 import LectureAd from "./components/adminDash/lectureAd/LectureCom";
-import Questions from "./components/proglang/Questions";
+import Questions from "./components/adminDash/questionAd/Questions";
 import HomeDash from "./components/adminDash/homeDash/HomeDash";
-// import io from "socket.io-client";
-import { useEffect } from "react";
-// import { socketioappend } from "./reduxstore/action/socketaction/Socketio";
+
 import AccountAd from "./components/adminDash/accountAd/AccountAd";
 import ContactAd from "./components/adminDash/contactAd/ContactAd";
+import Contact from "./components/chat/Contact";
+import QuestionCom from "./components/question/QuestionCom";
 function App() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const useSign = useSelector((state: RootState) => state.userSign);
   const { userInfo } = useSign;
 
-  // useEffect(() => {
-  //   if (userInfo && Object.keys(userInfo).length !== 0) {
-  //     const socket = io("http://localhost:4010");
-  //     let id = userInfo._id;
-  //     socket?.emit("NewUser", "fds");
-  //     dispatch(socketioappend(socket));
-  //   }
-  // }, [dispatch, userInfo]);
   return (
     <Maindiv>
       <Load />
@@ -98,7 +90,30 @@ function App() {
               }
             />
           </Route>
-
+          <Route
+            path="chating"
+            element={
+              <RequireAuth auth={userInfo}>
+                <Contact />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="chating/:langId"
+            element={
+              <RequireAuth auth={userInfo}>
+                <Contact />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="question/:idlang"
+            element={
+              <RequireAuth auth={userInfo}>
+                <QuestionCom />
+              </RequireAuth>
+            }
+          />
           <Route
             path="*"
             element={
