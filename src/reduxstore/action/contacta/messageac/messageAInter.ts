@@ -5,7 +5,8 @@ interface actionPendingMessage {
     | "REQUEST_GET_MESSAGES"
     | "REQUEST_CREATE_MESSAGE"
     | "REQUEST_APPEND_MESSAGES"
-    | "CLEAR_VARS_MESSAGE";
+    | "CLEAR_VARS_MESSAGE"
+    | "CLEAR_MESSAGE_ARRAY";
 }
 interface actionSuccessMessage {
   type: "SUCCESS_CREATE_MESSAGE";

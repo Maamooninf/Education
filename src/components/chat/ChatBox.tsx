@@ -45,7 +45,7 @@ function ChatBox({ currentChat, socket }: Chatx) {
     return () => {
       setmessage("");
     };
-  }, [currentChat, dispatch, pageNumber]);
+  }, [currentChat, pageNumber]);
 
   useEffect(() => {
     if (socket) {

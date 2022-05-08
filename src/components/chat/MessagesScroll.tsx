@@ -27,6 +27,7 @@ function MessagesScroll({ currentChat }: { currentChat: Conversation }) {
   };
   const trackScrolling = useCallback(() => {
     const wrappedElement = document.getElementById("listing-container");
+
     if (
       isTop(wrappedElement!) &&
       messload === false &&
@@ -46,6 +47,14 @@ function MessagesScroll({ currentChat }: { currentChat: Conversation }) {
       wrappedEleme?.removeEventListener("scroll", trackScrolling);
     };
   }, [trackScrolling, hasMore]);
+
+  useEffect(() => {
+    scroll?.current?.scrollIntoView({
+      behavior: "auto",
+      block: "end",
+      inline: "nearest",
+    });
+  }, [messDa]);
 
   return (
     <div className="chatmessages" id="listing-container">

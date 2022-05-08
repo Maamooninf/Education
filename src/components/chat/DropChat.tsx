@@ -14,7 +14,7 @@ const DropChat: React.FC<{
   const dispatch = useDispatch();
   if (drop) {
     const leaveGroup = () => {
-      socket?.emit("leavehand", current?._id);
+      // socket?.emit("leavehand", current?._id);
       dispatch(LeaveUserConversation(current?._id!, "static"));
     };
     return (

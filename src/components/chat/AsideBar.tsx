@@ -22,45 +22,44 @@ interface AsideInt {
 function AsideBar({ socket, currentChat }: AsideInt) {
   const dispatch = useDispatch();
   useEffect(() => {
-    if (currentChat) dispatch(GetUsersInConv());
-  }, [currentChat, dispatch]);
+    if (currentChat && currentChat?.isjoined !== 0) {
+      console.log(currentChat);
+      dispatch(GetUsersInConv());
+    }
+  }, [currentChat]);
   const userDashRed = useSelector((state: RootState) => state.userDash);
 
   const { users } = userDashRed;
 
   useEffect(() => {
     if (socket) {
-      socket
-        .off("newUser", (user) => {
+      socket.off("newUser").on("newUser", (user) => {
+        if (user) {
           dispatch(UpdateUsersInConv(user));
-        })
-        .on("newUser", (user) => {
-          if (user) {
-            dispatch(UpdateUsersInConv(user));
-          }
-        });
+        }
+      });
       socket
-        .off(
-          "InsertUser",
-          (payload: { user: UserForSerach; convId: string }) => {
-            dispatch(
-              JoinUserConversation(payload.convId, "real", payload.user)
-            );
-          }
-        )
+        .off("InsertUser")
         .on(
           "InsertUser",
           (payload: { user: UserForSerach; convId: string }) => {
+            console.log(payload);
             dispatch(
               JoinUserConversation(payload.convId, "real", payload.user)
             );
           }
         );
-      socket.off("RemoveUser");
-      socket.on("RemoveUser", (leave: { userId: string; convId: string }) => {
-        dispatch(LeaveUserConversation(leave.convId, "real", leave.userId));
-      });
+      socket
+        .off("RemoveUser")
+        .on("RemoveUser", (leave: { convId: string; userId: string }) => {
+          dispatch(LeaveUserConversation(leave.convId, "real", leave.userId));
+        });
     }
+    return () => {
+      socket?.off("InsertUser");
+      socket?.off("RemoveUser");
+      socket?.off("newUser");
+    };
   }, [socket]);
 
   return (

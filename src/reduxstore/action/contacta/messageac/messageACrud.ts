@@ -70,12 +70,18 @@ export const GetMessages = (conv: string, pageNumber: number) => {
       const {
         userSign: { userInfo },
       } = getState();
+
       if (pageNumber === 1) dispatch({ type: "REQUEST_GET_MESSAGES" });
       else {
         dispatch({ type: "REQUEST_APPEND_MESSAGES" });
       }
+      const {
+        MessAge: { messDa, pageSize },
+      } = getState();
       const { data } = await axios.get<Message[]>(
-        `http://localhost:4010/message/all/${conv}?page=${pageNumber}`,
+        `http://localhost:4010/message/all/${conv}?page=${pageNumber}&offset=${
+          messDa.length % pageSize
+        }`,
 
         {
           headers: {

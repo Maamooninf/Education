@@ -19,11 +19,15 @@ function Contact() {
   useEffect(() => {
     let mount = true;
 
-    if (mount) setsocket(io("http://localhost:4010"));
+    if (mount) {
+      if (!socket) {
+        setsocket(io("http://localhost:4010"));
+      }
+    }
     return () => {
       mount = false;
+      console.log("leave compnent");
       dispatch(SetChatId());
-      // socket?.emit("closeconne");
     };
   }, []);
 

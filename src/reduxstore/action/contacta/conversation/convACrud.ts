@@ -7,6 +7,7 @@ import { ActionConversation } from "./convAInter";
 import { Conversation } from "../../../reducer/contactreducer/conversation/converRinter";
 import { ActionUser } from "../../useraction/actionInterface";
 import { UserForSerach } from "../../../reducer/usereducer/userRinter";
+import { ActionMessage } from "../messageac/messageAInter";
 export const CreateConversation = (conv: Conversation) => {
   return async (
     dispatch: Dispatch<ActionConversation>,
@@ -149,7 +150,7 @@ export const LeaveUserConversation = (
   userId?: string
 ) => {
   return async (
-    dispatch: Dispatch<ActionConversation | ActionUser>,
+    dispatch: Dispatch<ActionConversation | ActionUser | ActionMessage>,
     getState: () => RootState
   ) => {
     try {
@@ -180,6 +181,7 @@ export const LeaveUserConversation = (
         }
         if (currentChat?._id === convId) {
           dispatch({ type: "DELETE_USER_CONVERSATION", payload: userId! });
+          dispatch({ type: "CLEAR_MESSAGE_ARRAY" });
         }
       }
     } catch (err: any) {

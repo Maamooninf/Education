@@ -18,6 +18,7 @@ export interface Message {
 export interface MessageState {
   messload: boolean;
   messDa: Message[];
+  pageSize: number;
   messerr: any;
   pageNumber: number;
   hasMore: boolean;
