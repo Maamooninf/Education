@@ -14,6 +14,8 @@ export interface Message {
   content: string;
   author: MessageAuthor;
   conversation: string;
+  createdAt: string;
+  date: string;
 }
 export interface MessageState {
   messload: boolean;

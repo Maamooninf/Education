@@ -33,7 +33,6 @@ function CovnerCom({ socket }: Convx) {
   useEffect(() => {
     let id = userInfo._id;
     if (socket && getnew === 1) {
-      console.log("joined");
       socket.emit("joinAll", { userId: id, groups: convDa });
     }
     if (socket) {
@@ -69,7 +68,7 @@ function CovnerCom({ socket }: Convx) {
           >
             <p>{con.title}</p>
 
-            <p>{con.lastmessage}</p>
+            <p>{con.lastmessage?.content}</p>
           </div>
         );
       })}

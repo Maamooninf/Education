@@ -27,9 +27,15 @@ export const ConVersation = (
       return { ...state, convload: false, convDa: action.payload, getnew: 1 };
     case "UPDATE_CONVERSATION_OREDER":
       let newCon: Conversation[] = [];
+      console.log(action.payload.convId);
       state.convDa.forEach((con) => {
         if (con._id === action.payload.convId) {
-          con.lastmessage = action.payload.lastmessage;
+          if (con.lastmessage) {
+            con.lastmessage.content = action.payload.lastmessage;
+            console.log("ewq");
+          } else {
+            con.lastmessage = { content: action.payload.lastmessage };
+          }
           newCon.unshift(con);
         } else newCon.push(con);
       });

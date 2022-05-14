@@ -2,7 +2,6 @@ import axios from "axios";
 import { Dispatch } from "react";
 import { RootState } from "../../../store";
 import "react-toastify/dist/ReactToastify.css";
-import { toast } from "react-toastify";
 import { ActionMessage } from "./messageAInter";
 import {
   Message,
@@ -44,7 +43,6 @@ export const CreateMessage = (
         ) {
           dispatch({ type: "SUCCESS_CREATE_MESSAGE", payload: realMess! });
         }
-        //  else if (realMess) {
         dispatch({
           type: "UPDATE_CONVERSATION_OREDER",
           payload: {
@@ -52,10 +50,8 @@ export const CreateMessage = (
             lastmessage: realMess?.content!,
           },
         });
-        // }
       }
     } catch (err: any) {
-      toast.error(err.message);
       dispatch({ type: "FAILED_CREATE_MESSAGE", payload: err.message });
     }
   };
@@ -92,7 +88,6 @@ export const GetMessages = (conv: string, pageNumber: number) => {
       );
       dispatch({ type: "SUCCESS_GET_MESSAGES", payload: data });
     } catch (err: any) {
-      toast.error(err.message);
       dispatch({ type: "FAILED_CREATE_MESSAGE", payload: err.message });
     }
   };

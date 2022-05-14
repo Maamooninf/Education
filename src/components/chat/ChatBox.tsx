@@ -54,6 +54,7 @@ function ChatBox({ currentChat, socket }: Chatx) {
           dispatch(CreateMessage(undefined, "real", msg));
         })
         .on("newMessage", (msg: Message) => {
+          console.log(msg);
           dispatch(CreateMessage(undefined, "real", msg));
         });
     }

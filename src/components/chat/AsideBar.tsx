@@ -23,7 +23,6 @@ function AsideBar({ socket, currentChat }: AsideInt) {
   const dispatch = useDispatch();
   useEffect(() => {
     if (currentChat && currentChat?.isjoined !== 0) {
-      console.log(currentChat);
       dispatch(GetUsersInConv());
     }
   }, [currentChat]);
